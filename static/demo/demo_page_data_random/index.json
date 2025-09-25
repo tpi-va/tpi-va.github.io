@@ -1,0 +1,250 @@
+{
+  "assistance": {
+    "constraint_reminder": [
+      "11000_1852_assistance_constraint_reminder_post_speech",
+      "11167_7672_assistance_constraint_reminder_post_speech",
+      "119481_11553_assistance_constraint_reminder_post_speech",
+      "2233_2424_assistance_constraint_reminder_post_speech",
+      "232_6272_assistance_constraint_reminder_mid_speech",
+      "95741_6064_assistance_constraint_reminder_mid_speech",
+      "9613_971_assistance_constraint_reminder_mid_speech"
+    ],
+    "recall_assistance": [
+      "13091_4134_assistance_recall_assistance_mid_speech",
+      "135460_9000_assistance_recall_assistance_post_speech",
+      "25670_10612_assistance_recall_assistance_post_speech",
+      "5462_12480_assistance_recall_assistance_post_speech",
+      "58190_10925_assistance_recall_assistance_mid_speech",
+      "67060_7046_assistance_recall_assistance_mid_speech",
+      "75933_2002_assistance_recall_assistance_post_speech"
+    ],
+    "modification": [
+      "132184_14413_assistance_modification_mid_speech",
+      "13859_8765_assistance_modification_mid_speech",
+      "22072_13008_assistance_modification_post_speech",
+      "27037_8453_assistance_modification_mid_speech",
+      "3188_14205_assistance_modification_mid_speech",
+      "4819_10152_assistance_modification_post_speech",
+      "686_2166_assistance_modification_post_speech"
+    ],
+    "elaborative_addition": [
+      "10460_3825_assistance_elaborative_addition_mid_speech",
+      "16480_2681_assistance_elaborative_addition_mid_speech",
+      "188_13990_assistance_elaborative_addition_post_speech",
+      "19948_401_assistance_elaborative_addition_post_speech",
+      "20396_8810_assistance_elaborative_addition_post_speech",
+      "21148_12171_assistance_elaborative_addition_mid_speech",
+      "3297_11706_assistance_elaborative_addition_mid_speech"
+    ],
+    "strategic_reframing": [
+      "1564_2630_assistance_strategic_reframing_post_speech",
+      "16480_2683_assistance_strategic_reframing_mid_speech",
+      "1687_1228_assistance_strategic_reframing_post_speech",
+      "1742_11863_assistance_strategic_reframing_mid_speech",
+      "45161_4450_assistance_strategic_reframing_mid_speech",
+      "7808_767_assistance_strategic_reframing_post_speech",
+      "9829_7982_assistance_strategic_reframing_mid_speech"
+    ]
+  },
+  "agreement": {
+    "alignment": [
+      "11000_1836_agreement_alignment_post_speech",
+      "136115_7347_agreement_alignment_post_speech",
+      "15655_5059_agreement_alignment_post_speech",
+      "18977_11018_agreement_alignment_post_speech",
+      "4429_10187_agreement_alignment_mid_speech",
+      "70066_13510_agreement_alignment_post_speech",
+      "869_3604_agreement_alignment_post_speech"
+    ],
+    "endorsement": [
+      "1042_13249_agreement_endorsement_mid_speech",
+      "13064_13561_agreement_endorsement_mid_speech",
+      "2179_3135_agreement_endorsement_mid_speech",
+      "38415_7241_agreement_endorsement_post_speech",
+      "67892_7757_agreement_endorsement_post_speech",
+      "7046_4069_agreement_endorsement_post_speech",
+      "9817_12261_agreement_endorsement_mid_speech"
+    ],
+    "justification": [
+      "13813_9097_agreement_justification_mid_speech",
+      "33150_7090_agreement_justification_mid_speech",
+      "54975_81_agreement_justification_mid_speech",
+      "578_15436_agreement_justification_post_speech",
+      "70066_13512_agreement_justification_post_speech",
+      "8941_7506_agreement_justification_mid_speech",
+      "9829_7970_agreement_justification_mid_speech"
+    ]
+  },
+  "floor_taking": {
+    "knowledge_display": [
+      "1042_13275_floor_taking_knowledge_display_mid_speech",
+      "10460_3837_floor_taking_knowledge_display_mid_speech",
+      "11646_6176_floor_taking_knowledge_display_mid_speech",
+      "4429_10211_floor_taking_knowledge_display_mid_speech",
+      "5071_2120_floor_taking_knowledge_display_post_speech",
+      "72483_6436_floor_taking_knowledge_display_mid_speech",
+      "94768_15562_floor_taking_knowledge_display_post_speech"
+    ],
+    "anecdotal_association": [
+      "104194_4562_floor_taking_anecdotal_association_mid_speech",
+      "116333_6538_floor_taking_anecdotal_association_mid_speech",
+      "1710_15092_floor_taking_anecdotal_association_post_speech",
+      "2839_4665_floor_taking_anecdotal_association_post_speech",
+      "4178_10988_floor_taking_anecdotal_association_post_speech",
+      "5855_14157_floor_taking_anecdotal_association_mid_speech",
+      "91327_4822_floor_taking_anecdotal_association_mid_speech"
+    ],
+    "evaluative_commentary": [
+      "11786_7831_floor_taking_evaluative_commentary_post_speech",
+      "14456_8662_floor_taking_evaluative_commentary_post_speech",
+      "33876_3885_floor_taking_evaluative_commentary_mid_speech",
+      "4515_1495_floor_taking_evaluative_commentary_mid_speech",
+      "4988_11506_floor_taking_evaluative_commentary_mid_speech",
+      "71551_9582_floor_taking_evaluative_commentary_post_speech",
+      "9747_9998_floor_taking_evaluative_commentary_post_speech"
+    ]
+  },
+  "disagreement": {
+    "simple_correction_with_alternative": [
+      "129_4217_disagreement_simple_correction_with_alternative_post_speech",
+      "3426_3230_disagreement_simple_correction_with_alternative_post_speech",
+      "4941_6350_disagreement_simple_correction_with_alternative_mid_speech",
+      "57338_12876_disagreement_simple_correction_with_alternative_post_speech",
+      "7808_744_disagreement_simple_correction_with_alternative_mid_speech",
+      "8078_8270_disagreement_simple_correction_with_alternative_mid_speech",
+      "8133_11631_disagreement_simple_correction_with_alternative_post_speech"
+    ],
+    "request_for_deferment": [
+      "13348_14650_disagreement_request_for_deferment_post_speech",
+      "19997_6460_disagreement_request_for_deferment_mid_speech",
+      "21148_12154_disagreement_request_for_deferment_post_speech",
+      "30626_11066_disagreement_request_for_deferment_post_speech",
+      "33876_3860_disagreement_request_for_deferment_post_speech",
+      "88610_12571_disagreement_request_for_deferment_mid_speech",
+      "8988_12831_disagreement_request_for_deferment_mid_speech"
+    ],
+    "procedural_objection": [
+      "104968_9192_disagreement_procedural_objection_post_speech",
+      "2768_11895_disagreement_procedural_objection_mid_speech",
+      "36910_3963_disagreement_procedural_objection_mid_speech",
+      "416_13036_disagreement_procedural_objection_post_speech",
+      "52063_14336_disagreement_procedural_objection_post_speech",
+      "57338_12880_disagreement_procedural_objection_post_speech",
+      "6035_8844_disagreement_procedural_objection_post_speech"
+    ],
+    "veto_with_justification": [
+      "13348_14646_disagreement_veto_with_justification_post_speech",
+      "1634_2452_disagreement_veto_with_justification_post_speech",
+      "19948_381_disagreement_veto_with_justification_post_speech",
+      "24031_3024_disagreement_veto_with_justification_post_speech",
+      "66290_14699_disagreement_veto_with_justification_mid_speech",
+      "93531_5987_disagreement_veto_with_justification_post_speech",
+      "9996_10854_disagreement_veto_with_justification_post_speech"
+    ]
+  },
+  "clarification": {
+    "detail_confirmation": [
+      "10143_15359_clarification_detail_confirmation_mid_speech",
+      "12457_7375_clarification_detail_confirmation_post_speech",
+      "15590_1087_clarification_detail_confirmation_mid_speech",
+      "1827_4672_clarification_detail_confirmation_mid_speech",
+      "21701_12498_clarification_detail_confirmation_post_speech",
+      "52375_13798_clarification_detail_confirmation_post_speech",
+      "7255_11721_clarification_detail_confirmation_post_speech"
+    ],
+    "entity_specification": [
+      "11646_6125_clarification_entity_specification_post_speech",
+      "14676_676_clarification_entity_specification_mid_speech",
+      "38415_7217_clarification_entity_specification_post_speech",
+      "578_15409_clarification_entity_specification_mid_speech",
+      "63690_2487_clarification_entity_specification_mid_speech",
+      "7071_520_clarification_entity_specification_mid_speech",
+      "9465_6697_clarification_entity_specification_post_speech"
+    ],
+    "constraint_clarification": [
+      "1634_2439_clarification_constraint_clarification_mid_speech",
+      "21701_12500_clarification_constraint_clarification_post_speech",
+      "25299_4830_clarification_constraint_clarification_mid_speech",
+      "3212_13072_clarification_constraint_clarification_post_speech",
+      "5626_9281_clarification_constraint_clarification_mid_speech",
+      "58190_10892_clarification_constraint_clarification_post_speech",
+      "8133_11620_clarification_constraint_clarification_mid_speech"
+    ],
+    "goal_clarification": [
+      "1042_13231_clarification_goal_clarification_mid_speech",
+      "11702_8570_clarification_goal_clarification_post_speech",
+      "141003_2804_clarification_goal_clarification_post_speech",
+      "18977_10998_clarification_goal_clarification_post_speech",
+      "29082_4311_clarification_goal_clarification_post_speech",
+      "6035_8831_clarification_goal_clarification_mid_speech",
+      "9475_8932_clarification_goal_clarification_post_speech"
+    ]
+  },
+  "topic_change": {
+    "priority_alert": [
+      "13348_14636_topic_change_priority_alert_post_speech",
+      "210_988_topic_change_priority_alert_post_speech",
+      "2914_2339_topic_change_priority_alert_mid_speech",
+      "29497_7690_topic_change_priority_alert_mid_speech",
+      "759_12088_topic_change_priority_alert_post_speech",
+      "83862_8365_topic_change_priority_alert_mid_speech",
+      "9010_10636_topic_change_priority_alert_post_speech"
+    ],
+    "task_coordination": [
+      "12408_3069_topic_change_task_coordination_mid_speech",
+      "14456_8626_topic_change_task_coordination_post_speech",
+      "156522_14430_topic_change_task_coordination_post_speech",
+      "21308_11_topic_change_task_coordination_mid_speech",
+      "30615_13651_topic_change_task_coordination_mid_speech",
+      "5470_10742_topic_change_task_coordination_post_speech",
+      "9465_6708_topic_change_task_coordination_mid_speech"
+    ],
+    "social_engagement": [
+      "1042_13236_topic_change_social_engagement_post_speech",
+      "15956_13757_topic_change_social_engagement_mid_speech",
+      "2250_1408_topic_change_social_engagement_post_speech",
+      "4178_10952_topic_change_social_engagement_post_speech",
+      "56759_4993_topic_change_social_engagement_post_speech",
+      "6776_9600_topic_change_social_engagement_post_speech",
+      "9817_12249_topic_change_social_engagement_mid_speech"
+    ],
+    "spontaneous_inquiry": [
+      "101525_1359_topic_change_spontaneous_inquiry_mid_speech",
+      "11167_7647_topic_change_spontaneous_inquiry_mid_speech",
+      "14372_3488_topic_change_spontaneous_inquiry_post_speech",
+      "33150_7075_topic_change_spontaneous_inquiry_post_speech",
+      "3619_14591_topic_change_spontaneous_inquiry_mid_speech",
+      "7255_11734_topic_change_spontaneous_inquiry_mid_speech",
+      "7843_5412_topic_change_spontaneous_inquiry_mid_speech"
+    ]
+  },
+  "tangentialization": {
+    "expedited_execution": [
+      "1042_13258_tangentialization_expedited_execution_post_speech",
+      "107624_3404_tangentialization_expedited_execution_post_speech",
+      "14644_10298_tangentialization_expedited_execution_post_speech",
+      "19165_13415_tangentialization_expedited_execution_mid_speech",
+      "210_1014_tangentialization_expedited_execution_post_speech",
+      "4429_10194_tangentialization_expedited_execution_post_speech",
+      "7046_4080_tangentialization_expedited_execution_mid_speech"
+    ],
+    "action_invalidation": [
+      "11138_14762_tangentialization_action_invalidation_post_speech",
+      "11702_8595_tangentialization_action_invalidation_mid_speech",
+      "15655_5064_tangentialization_action_invalidation_mid_speech",
+      "19272_10086_tangentialization_action_invalidation_post_speech",
+      "19424_14503_tangentialization_action_invalidation_mid_speech",
+      "21148_12163_tangentialization_action_invalidation_mid_speech",
+      "4941_6364_tangentialization_action_invalidation_mid_speech"
+    ],
+    "answer_preemption": [
+      "12936_1168_tangentialization_answer_preemption_post_speech",
+      "27037_8440_tangentialization_answer_preemption_post_speech",
+      "4429_10193_tangentialization_answer_preemption_mid_speech",
+      "58190_10921_tangentialization_answer_preemption_mid_speech",
+      "81567_15233_tangentialization_answer_preemption_mid_speech",
+      "85781_6209_tangentialization_answer_preemption_post_speech",
+      "88610_12581_tangentialization_answer_preemption_mid_speech"
+    ]
+  }
+}

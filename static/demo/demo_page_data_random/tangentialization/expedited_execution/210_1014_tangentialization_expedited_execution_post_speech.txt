@@ -1,0 +1,2 @@
+First Speaker: Classify the following words by their grammatical categories: walk, interesting, quickly.
+Second Speaker: Just tag each word with its part of speech.

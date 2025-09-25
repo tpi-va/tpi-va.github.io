@@ -1,0 +1,2 @@
+First Speaker: I'm going to list some CSS properties and you tell me what each one does, okay?
+Second Speaker: Wait, you gotta make sure the AI knows which ones you're talking about first.

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="TPI-VA: Third-Party Interruption-Aware Voice Assistant" />
+  <meta property="og:title" content="TPI-VA" />
+  <meta property="og:description" content="Third-Party Interruption-Aware Spoken Dialogue Dataset" />
+  <meta property="og:url" content="https://tpi-va.github.io/" />
+  <meta name="twitter:title" content="TPI-VA" />
+  <meta name="twitter:description" content="Third-Party Interruption-Aware Spoken Dialogue Dataset" />
+  <meta name="keywords" content="spoken dialogue, third-party interruptions, conversational AI, voice assistant, human-computer interaction" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TPI-VA: Third-Party Interruption-Aware Voice Assistant</title>
+
+  <!-- Bulma + fonts -->
+  <link rel="stylesheet" href="static/css/bulma.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css" />
+
+  <style>
+    :root {
+      --primary: #e59866;
+      --accent: #a569bd;
+      --light-bg: #fefcfb;
+      --dark-text: #3c2f2f;
+      --gray-text: #856d63;
+    }
+    body { font-family: 'Inter', sans-serif; color: var(--dark-text); }
+    .hero-body { padding: 3rem 1.5rem; }
+    .section { padding: 3rem 1.5rem; }
+
+    .gradient-title {
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .section-title { font-weight: 700; margin-bottom: 1.5rem; }
+
+    /* ---- Chat bubble styles (DeepDialogue-like) ---- */
+    .chat-card { background: var(--light-bg); border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,.05); margin-bottom:2rem; }
+    .chat-header { display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px; }
+    .chat-domain { background: var(--primary); color:#fff; padding:4px 10px; border-radius:999px; font-weight:600; font-size:.9rem; }
+    .chat-models { color: var(--gray-text); font-size:.85rem; }
+
+    .msg { max-width: 80%; padding: 12px 14px; border-radius: 12px; margin-bottom: 12px; }
+    .msg .speaker { font-weight:600; margin-bottom:6px; }
+    .msg .text { line-height: 1.5; }
+    .msg.user { background:#fcebd5; border-left:4px solid #f8cfa0; margin-right:auto; border-top-left-radius:4px; }
+    .msg.assistant { background:#f9e2dd; border-right:4px solid #eeb5ad; margin-left:auto; border-top-right-radius:4px; }
+
+    /* Row with two chat bubbles side-by-side (Eval / Janus) */
+    .bubble-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;        /* allow wrapping on small screens */
+      align-items: stretch;   /* force equal height between Eval and Janus bubbles */
+      margin-top: 8px;
+    }
+    .bubble-row .msg {
+      flex: 1 1 320px;        /* distribute width evenly */
+      display: flex;          /* flex column inside bubble */
+      flex-direction: column; /* speaker above, text below */
+      height: 100%;           /* stretch to equal height */
+      margin-bottom: 0;
+    }
+    .bubble-row .msg .text {
+      margin-top: 6px;        /* spacing below speaker */
+    }
+
+    .audio-row { display:flex; gap:16px; margin-top:18px; flex-wrap:wrap; }
+    .audio-box { flex:1 1 320px; background:#fff; border-radius:10px; padding:12px; box-shadow:0 2px 4px rgba(0,0,0,.05); }
+    .audio-title { font-weight:600; margin-bottom:8px; }
+    audio { width:100%; height:40px; }
+    hr.soft { border:0; border-top:1px solid #eee; margin:16px 0; }
+    .kv { color: var(--gray-text); font-size:.9rem; }
+    /* Vertical separator between the two columns (Eval | Janus) */
+    .row-with-sep {
+      display: flex;
+      gap: 64px;
+      align-items: stretch;         /* equal height columns */
+      flex-wrap: wrap;              /* wrap on mobile */
+      position: relative;
+    }
+    .v-sep {
+      width: 1px;
+      align-self: stretch;          /* full height */
+      background: linear-gradient(to bottom, transparent, #e6ded7, transparent);
+      opacity: .9;
+    }
+    /* Custom styles for Figure captions */
+    .figure {
+     text-align: center;
+     margin: 2rem 0; /* Adjust spacing as needed */
+    }
+    .figure img {
+      width: 90%;
+      max-width: 800px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,.1);
+    }
+    .figure-caption {
+     margin-top: 0.8rem;
+     font-size: 0.95rem;
+     color: var(--gray-text);
+    }
+
+    /* New style for the transcript block */
+    .transcript-block {
+      background: #f0f0f0; /* Light gray background */
+      border-left: 4px solid #ccc; /* Subtle left border */
+      padding: 15px;
+      margin-top: 15px; /* Spacing above */
+      margin-bottom: 25px; /* Spacing below */
+      border-radius: 8px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #444;
+      white-space: pre-wrap; /* Preserve whitespace and allow wrapping */
+    }
+
+
+    @media (max-width: 768px) {
+      .v-sep { display: none; }     /* hide the divider on small screens */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <h1 class="title is-1 gradient-title">TPI-VA</h1>
+        <h2 class="title is-3">Third-Party Interruption-Aware Voice Assistant</h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- Abstract -->
+  <section class="section section-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 section-title">Abstract</h2>
+      <div class="content has-text-justified">
+        <p>
+        While advancements in Spoken Language Models (SLMs) for voice assistants have enabled natural human-like conversations, a critical limitation persists in scenarios involving third-party interruptions, where multi-speaker utterances are often misidentified as a single speaker's continuous turn.
+        To overcome this limitation, this paper introduces a comprehensive framework to define and develop Third-Party Interruption (TPI) awareness. We propose two key resources to facilitate this: (1) TPI-Train, a large-scale training dataset of 80K instances derived from 26 realistic scenarios, and (2) TPI-Bench, a benchmark specifically designed to rigorously assess a model’s ability to achieve TPI-awareness.
+        However, the multimodal nature of this data introduces a key training obstacle: semantic shortcut learning. This occurs when models learn to identify interruptions based on common linguistic patterns, rather than the essential acoustic shift between speakers.
+        To mitigate this, we introduce a training methodology that employs hard-negative mining, which compels the model to move beyond linguistic cues and ground its decisions in acoustic information, thereby making it genuinely TPI-aware.
+        Our approach is validated through rigorous experiments, demonstrating that the model successfully learns to rely on acoustic cues for interruption detection and maintains high robustness against challenging trick samples. Crucially, human evaluations confirm that the response strategies embedded in our framework are highly preferred by users for their effectiveness and naturalness.
+        The dataset will be publicly available.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container is-max-desktop">
+
+      <figure class="figure">
+        <img src="static/images/figure1.png" alt="Figure 1 Description">
+        <figcaption class="figure-caption">
+          <b>Figure 1:</b> Example of a TPI query sampled from our TPI-Corpus. The spoken language model mistakes the third-party interruption for a continuous utterance from the primary speaker, while our model correctly identifies the interruption and responds in a TPI-aware manner.
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <img src="static/images/figure2.png" alt="Figure 2 Description">
+        <figcaption class="figure-caption">
+          <b>Figure 2:</b> Overview of the TPI-Corpus and TPI-Bench construction pipeline. (a) The TPI-Corpus is generated from voice assistant data to reflect various interruption scenarios. For the train dataset, queries are classified as Actionable or Ignorable with answers generated according to the predefined response strategy. (b) A certain of amount of queries are sampled for TPI-Test. The samples exhibiting textual ambiguity—interruptions that are indistinguishable by text alone, even when interpreted as the primary speaker’s continuous utterances—are filtered and re-synthesized in that speaker’s voice to create Janus-Test.
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- TPI-Corpus -->
+  <section class="section section-light" id="tpi-corpus">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 section-title">TPI-Corpus</h2>
+
+      <div class="card chat-card">
+        <div class="card-content">
+          <!-- Controls -->
+          <div class="columns is-variable is-4">
+            <div class="column is-5">
+              <label class="label">Taxonomy</label>
+              <div class="select is-fullwidth">
+                <select id="txSelect">
+                  <option value="">-- Select taxonomy --</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-5">
+              <label class="label">Sub-taxonomy</label>
+              <div class="select is-fullwidth">
+                <select id="subtxSelect" disabled>
+                  <option value="">-- Select sub-taxonomy --</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2 is-flex is-align-items-flex-end">
+              <button id="randomBtn" class="button is-info is-light is-fullwidth">Shuffle</button>
+            </div>
+          </div>
+
+          <hr class="soft">
+
+          <!-- Header -->
+          <div class="chat-header">
+            <span class="chat-domain" id="corpusTag">Preview</span>
+            <span class="chat-models">Audio query above, transcript below</span>
+          </div>
+
+          <!-- Audio -->
+          <div class="audio-row">
+            <div class="audio-box">
+              <div class="audio-title">Audio (query)</div>
+              <audio id="corpusAudio" controls></audio>
+            </div>
+          </div>
+
+          <!-- Transcript as two bubbles -->
+          <div id="corpusBubbles" style="margin-top:12px;">
+            <div class="msg user">
+              <div class="speaker">First Speaker</div>
+              <div class="text" id="spk1Text">?</div>
+            </div>
+            <div class="msg assistant">
+              <div class="speaker">Second Speaker</div>
+              <div class="text" id="spk2Text">?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Response Examples -->
+  <section class="section section-light" id="response-examples">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 section-title">Response Examples</h2>
+
+      <!-- Actionable -->
+      <div class="card chat-card">
+        <div class="card-content">
+          <div class="level">
+            <div class="level-left">
+              <h3 class="title is-4">1. Actionable</h3>
+            </div>
+            <div class="level-right">
+              <button id="randActionableBtn" class="button is-info is-light">Shuffle</button>
+            </div>
+          </div>
+          <div class="audio-row" id="actionableAudioRow"></div>
+          <div id="actionableTranscriptBlock" class="transcript-block"></div>
+          <hr class="soft">
+          <h4 class="title is-5">Baseline</h4>
+          <div id="actionableBaselineRow" class="bubble-row"></div>
+          <hr class="soft">
+          <h4 class="title is-5">Ours</h4>
+          <div id="actionableOursRow" class="bubble-row"></div>
+        </div>
+      </div>
+
+      <!-- Ignorable -->
+      <div class="card chat-card">
+        <div class="card-content">
+          <div class="level">
+            <div class="level-left">
+              <h3 class="title is-4">2. Ignorable</h3>
+            </div>
+            <div class="level-right">
+              <button id="randIgnorableBtn" class="button is-info is-light">Shuffle</button>
+            </div>
+          </div>
+          <div class="audio-row" id="ignorableAudioRow"></div>
+          <div id="ignorableTranscriptBlock" class="transcript-block"></div>
+          <hr class="soft">
+          <h4 class="title is-5">Baseline</h4>
+          <div id="ignorableBaselineRow" class="bubble-row"></div>
+          <hr class="soft">
+          <h4 class="title is-5">Ours</h4>
+          <div id="ignorableOursRow" class="bubble-row"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This page was built by referencing the <a href="https://github.com/SALT-Research/DeepDialogue" target="_blank">DeepDialogue</a> project page, which itself was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>, originally adapted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              <br> This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    /* ----------------
+       TPI-Corpus logic
+    ------------------ */
+    const DATA_ROOT = 'static/demo/demo_page_data_random';
+    const MANIFEST_URL = DATA_ROOT + '/index.json';
+    const txSelect = document.getElementById('txSelect');
+    const subtxSelect = document.getElementById('subtxSelect');
+    const randomBtn = document.getElementById('randomBtn');
+    const corpusAudio = document.getElementById('corpusAudio');
+    const spk1Text = document.getElementById('spk1Text');
+    const spk2Text = document.getElementById('spk2Text');
+    const corpusTag = document.getElementById('corpusTag');
+    let manifest = null;
+    let currentTax = '';
+    let currentSub = '';
+
+    function selectFirstByDefault() {
+      const taxonomies = Object.keys(manifest || {}).sort();
+      if (!taxonomies.length) return;
+
+      const firstTax = taxonomies[0];
+      txSelect.value = firstTax;
+      onTaxonomyChange(); // populates subtxSelect
+
+      const subtax = Object.keys(manifest[firstTax] || {}).sort();
+      if (!subtax.length) return;
+
+      const firstSub = subtax[0];
+      subtxSelect.value = firstSub;
+      onSubtaxonomyChange(); // loads first sample in that folder (list[0])
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadManifest();
+      populateTaxonomies();
+
+      // wire events
+      txSelect.addEventListener('change', onTaxonomyChange);
+      subtxSelect.addEventListener('change', onSubtaxonomyChange);
+      randomBtn.addEventListener('click', loadRandomSample);
+
+      // NEW: pick the very first taxonomy/sub-taxonomy by default
+      selectFirstByDefault();
+
+      // Response Examples init
+      document.getElementById("randActionableBtn").addEventListener("click", () => loadResponseExample("Actionable"));
+      document.getElementById("randIgnorableBtn").addEventListener("click", () => loadResponseExample("Ignorable"));
+      loadResponseExample("Actionable");
+      loadResponseExample("Ignorable");
+    });
+
+    async function loadManifest() {
+      try {
+        const res = await fetch(MANIFEST_URL, { cache: 'no-store' });
+        if (!res.ok) throw new Error('Manifest not found');
+        manifest = await res.json();
+      } catch (e) {
+        console.error(e);
+        manifest = {};
+      }
+    }
+    function populateTaxonomies() {
+      txSelect.length = 1;
+      Object.keys(manifest).sort().forEach(tx => {
+        const opt = document.createElement('option');
+        opt.value = opt.textContent = tx;
+        txSelect.appendChild(opt);
+      });
+    }
+    function onTaxonomyChange() {
+      currentTax = txSelect.value;
+
+      // reset sub-taxonomy
+      subtxSelect.disabled = !currentTax;
+      subtxSelect.length = 1;
+      subtxSelect.value = "";   // ? force reset UI to placeholder
+      currentSub = "";          // ? clear currentSub too
+
+      if (!currentTax || !manifest[currentTax]) {
+        resetView();
+        return;
+      }
+
+      const subtax = Object.keys(manifest[currentTax]).sort();
+      subtax.forEach(st => {
+        const opt = document.createElement('option');
+        opt.value = opt.textContent = st;
+        subtxSelect.appendChild(opt);
+      });
+
+      resetView(); // taxonomy? ?? ????? "Please select a sub-taxonomy above."
+    }
+    function onSubtaxonomyChange() {
+      currentSub = subtxSelect.value;
+      resetView();
+      if (!currentTax || !currentSub) return;
+      const list = manifest[currentTax]?.[currentSub] || [];
+      if (list.length) renderByBasename(list[0]);
+    }
+    function resetView() {
+      corpusTag.textContent = currentTax && currentSub ? `${currentTax} / ${currentSub}` : 'Preview';
+      corpusAudio.src = '';
+
+      if (!currentTax) {
+        spk1Text.textContent = "Please select a taxonomy above.";
+        spk2Text.textContent = "Please select a taxonomy above.";
+      } else if (!currentSub) {
+        spk1Text.textContent = "Please select a sub-taxonomy above.";
+        spk2Text.textContent = "Please select a sub-taxonomy above.";
+      } else {
+        spk1Text.textContent = '?';
+        spk2Text.textContent = '?';
+      }
+    }
+    // function resetView() {
+    //   corpusTag.textContent = currentTax && currentSub ? `${currentTax} / ${currentSub}` : 'Preview';
+    //   corpusAudio.src = ''; spk1Text.textContent = '?'; spk2Text.textContent = '?'; fileHint.textContent = '';
+    // }
+    function loadRandomSample() {
+      if (!currentTax || !currentSub) return;
+      const list = manifest[currentTax]?.[currentSub] || [];
+      if (!list.length) return;
+      const idx = Math.floor(Math.random() * list.length);
+      renderByBasename(list[idx]);
+    }
+    async function renderByBasename(base) {
+      const wav = `${DATA_ROOT}/${currentTax}/${currentSub}/${base}.wav`;
+      const txt = `${DATA_ROOT}/${currentTax}/${currentSub}/${base}.txt`;
+      corpusAudio.src = wav;
+      try {
+        const res = await fetch(txt, { cache: 'no-store' });
+        const raw = await res.text();
+        const { s1, s2 } = parseTwoLineTranscript(raw);
+        spk1Text.textContent = s1; spk2Text.textContent = s2;
+      } catch { spk1Text.textContent = spk2Text.textContent = '?'; }
+    }
+    function parseTwoLineTranscript(raw) {
+      const lines = raw.replace(/\r/g,'').split('\n').map(t => t.trim()).filter(Boolean);
+      let s1 = '', s2 = '';
+      const re1 = /^speaker\s*1\s*:\s*(.*)$/i, re2 = /^speaker\s*2\s*:\s*(.*)$/i;
+      for (const line of lines) {
+        if (re1.test(line) && !s1) s1 = line.replace(re1,'$1');
+        if (re2.test(line) && !s2) s2 = line.replace(re2,'$1');
+      }
+      if (!s1) s1 = lines[0]||''; if (!s2) s2 = lines[1]||'';
+      return { s1, s2 };
+    }
+
+    /* ----------------
+       Response Examples logic
+    ------------------ */
+    async function fetchTextFile(path) {
+      try { const res = await fetch(path); return res.ok ? await res.text() : "(missing)"; }
+      catch { return "(error)"; }
+    }
+    function createAudioBox(title, src) {
+      const box = document.createElement('div');
+      box.className = 'audio-box';
+      box.innerHTML = `<div class="audio-title">${title}</div>
+        <audio controls><source src="${src}" type="audio/wav"></audio>`;
+      return box;
+    }
+    async function loadResponseExample(style) {
+      // Root under static/demo/demo_page_answer/{Actionable|Ignorable}
+      const root = `static/demo/demo_page_answer/${style}`;
+      const sets = ["TPI-Eval", "TPI-Janus"];
+
+      // Get a list of wav files from ours/audio (Eval) and pick one basename at random
+      const evalListRes = await fetch(`${root}/TPI-Eval/ours/audio/index.json`, { cache: "no-store" });
+      const evalList = evalListRes.ok ? await evalListRes.json() : [];
+      if (!evalList.length) return;
+
+      const base = evalList[Math.floor(Math.random() * evalList.length)].replace(".wav", "");
+
+      // Build paths for audio and texts (Eval / Janus share the same basename)
+      const audioPaths       = sets.map(set => `${root}/${set}/ours/audio/${base}.wav`);
+      const baselineTxtPaths = sets.map(set => `${root}/${set}/baseline/txt/${base}.txt`);
+      const oursTxtPaths     = sets.map(set => `${root}/${set}/ours/txt/${base}.txt`);
+
+      // NEW: Fetch the audio's transcript (for the added block)
+      const audioTranscriptPath = `${root}/TPI-Eval/baseline/audio/${base}.txt`; // Assuming baseline path for the audio transcript
+      const audioTranscript = await fetchTextFile(audioTranscriptPath);
+
+      // ---- audio (ours) row ----
+      const audioRow = document.getElementById(style.toLowerCase() + "AudioRow");
+      audioRow.classList.add("row-with-sep");   // add vertical separator capability
+      audioRow.innerHTML = "";
+      audioRow.appendChild(createAudioBox("TPI-Test",  audioPaths[0]));
+
+      // insert vertical separator between Eval and Janus
+      const sep1 = document.createElement("div");
+      sep1.className = "v-sep";
+      audioRow.appendChild(sep1);
+
+      audioRow.appendChild(createAudioBox("Janus-Test", audioPaths[1]));
+
+      // NEW: Render the transcript block
+      const transcriptBlock = document.getElementById(style.toLowerCase() + "TranscriptBlock");
+      if (transcriptBlock) {
+        transcriptBlock.innerHTML = `<h4>Original Audio Transcript:</h4><pre>${audioTranscript}</pre>`;
+      }
+
+      // Helper to render a pair of bubbles into a target row (Eval left, Janus right)
+      const renderBubbleRow = async (targetId, evalLabel, evalTxtPath, janusLabel, janusTxtPath) => {
+        const container = document.getElementById(targetId);
+        if (!container) return;
+
+        // Fetch both texts in parallel
+        const [evalTxt, janusTxt] = await Promise.all([
+          fetchTextFile(evalTxtPath),
+          fetchTextFile(janusTxtPath)
+        ]);
+
+        // Bubble markup (uses existing .msg.user / .msg.assistant styles)
+        // ensure separator layout on the row container
+        container.classList.add("row-with-sep");
+        container.innerHTML = `
+          <div class="msg user">
+            <div class="speaker">${evalLabel}</div>
+            <div class="text">${(evalTxt || "").replace(/\n/g, "<br>")}</div>
+          </div>
+          <div class="v-sep"></div>
+          <div class="msg assistant">
+            <div class="speaker">${janusLabel}</div>
+            <div class="text">${(janusTxt || "").replace(/\n/g, "<br>")}</div>
+          </div>
+        `;
+      };
+
+      // ---- Baseline bubble row ----
+      await renderBubbleRow(
+        style.toLowerCase() + "BaselineRow",
+        "TPI-Test",
+        baselineTxtPaths[0],
+        "Janus-Test",
+        baselineTxtPaths[1]
+      );
+
+      // ---- Ours bubble row ----
+      await renderBubbleRow(
+        style.toLowerCase() + "OursRow",
+        "TPI-Test",
+        oursTxtPaths[0],
+        "Janus-Test",
+        oursTxtPaths[1]
+      );
+    }
+  </script>
+</body>
+</html>

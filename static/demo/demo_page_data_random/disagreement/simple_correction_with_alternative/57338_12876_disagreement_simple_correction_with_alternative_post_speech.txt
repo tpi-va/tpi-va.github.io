@@ -1,0 +1,2 @@
+First Speaker: Im going to list some CSS properties and you tell me what said property accomplishes, okay?
+Second Speaker: Actually, why not just look up a cheat sheet instead. It would be faster.
