@@ -1,0 +1,2 @@
+First Speaker: Generate a unique nickname for someone named George.
+Second Speaker: Just ask for a cool nickname for George.

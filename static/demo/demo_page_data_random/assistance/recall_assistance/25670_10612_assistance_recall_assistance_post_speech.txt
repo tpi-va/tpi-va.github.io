@@ -1,0 +1,2 @@
+First Speaker: Categorize the following words into either animals or plants. Apple, shark, oak, cow.
+Second Speaker: Apple and oak are plants.

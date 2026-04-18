@@ -1,0 +1,2 @@
+First Speaker: Generate a unique nickname for someone named George.
+Second Speaker: Oh hey George, that makes me think of the time you dressed up as a pirate for Halloween.

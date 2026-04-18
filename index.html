@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Still Between Us? Evaluating and Improving Voice Assistant Robustness to Third-Party Interruptions">
+  <meta name="description" content="A comprehensive framework for Third-Party Interruption (TPI) awareness in spoken language models, with a large-scale training dataset and benchmark.">
+  <meta name="keywords" content="spoken dialogue, third-party interruptions, conversational AI, voice assistant, spoken language model, human-computer interaction">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Still Between Us? Evaluating and Improving Voice Assistant Robustness to Third-Party Interruptions">
+  <meta property="og:description" content="A comprehensive framework for Third-Party Interruption (TPI) awareness in spoken language models.">
+  <meta property="og:url" content="https://tpi-va.github.io/">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Still Between Us? Evaluating and Improving Voice Assistant Robustness to Third-Party Interruptions">
+  <meta name="twitter:description" content="A comprehensive framework for Third-Party Interruption (TPI) awareness in spoken language models.">
+  
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="Still Between Us? Evaluating and Improving Voice Assistant Robustness to Third-Party Interruptions">
+  <meta name="citation_author" content="Lee, Dongwook">
+  <meta name="citation_author" content="Song, Eunwoo">
+  <meta name="citation_author" content="Lee, Che Hyun">
+  <meta name="citation_author" content="Kim, Heeseung">
+  <meta name="citation_author" content="Yoon, Sungroh">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="ACL 2026">
+
+  <title>Still Between Us? Evaluating and Improving Voice Assistant Robustness to Third-Party Interruptions</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+
+  <!-- Critical CSS -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Non-critical CSS -->
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Deferred JS -->
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Still Between Us? Evaluating and Improving Voice Assistant Robustness to Third-Party Interruptions",
+    "description": "A comprehensive framework for Third-Party Interruption (TPI) awareness in spoken language models, with a large-scale training dataset and benchmark.",
+    "datePublished": "2026",
+    "publisher": {
+      "@type": "Organization",
+      "name": "ACL 2026"
+    },
+    "url": "https://tpi-va.github.io/",
+    "keywords": ["spoken dialogue", "third-party interruptions", "conversational AI", "voice assistant", "spoken language model"],
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container hero-container">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Still Between Us?<br>Evaluating and Improving Voice Assistant Robustness<br>to Third-Party Interruptions</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Dongwook Lee<sup>1</sup></span>
+              <span class="author-block">Eunwoo Song<sup>2</sup></span>
+              <span class="author-block">Che Hyun Lee<sup>1</sup></span>
+              <span class="author-block">Heeseung Kim<sup>3,&dagger;</sup></span>
+              <span class="author-block">Sungroh Yoon<sup>1,&dagger;</sup></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Seoul National University, <sup>2</sup>Yonsei University, <sup>3</sup>University of Seoul</span>
+              <br>
+              <span class="author-block">🎉 ACL 2026 🎉</span>
+              <span class="eql-cntrb"><small><br><sup>&dagger;</sup>Corresponding Authors</small></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Paper (OpenReview) -->
+                <span class="link-block">
+                  <a href="https://openreview.net/forum?id=RagjAuCN4M&referrer=%5BAuthor%20Console%5D(%2Fgroup%3Fid%3Daclweb.org%2FACL%2F2026%2FConference%2FAuthors%23your-submissions)" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- arXiv -->
+                <span class="link-block">
+                  <a href="#" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+                <!-- Code -->
+                <span class="link-block">
+                  <a href="https://github.com/pleasedpenguin/tpi-va" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- HuggingFace Dataset -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/pleasedpenguin/tpi-va-corpus" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor"><path d="M16.781 3.277c2.997 1.704 4.844 4.851 4.844 8.258 0 .995-.155 1.955-.443 2.857a1.332 1.332 0 011.125.4 1.41 1.41 0 01.2 1.723c.204.165.352.385.428.632l.017.062c.06.222.12.69-.2 1.166.244.37.279.836.093 1.236-.255.57-.893 1.018-2.128 1.5l-.202.078-.131.048c-.478.173-.89.295-1.061.345l-.086.024c-.89.243-1.808.375-2.732.394-1.32 0-2.3-.36-2.923-1.067a9.852 9.852 0 01-3.18.018C9.778 21.647 8.802 22 7.494 22a11.249 11.249 0 01-2.541-.343l-.221-.06-.273-.08a16.574 16.574 0 01-1.175-.405c-1.237-.483-1.875-.93-2.13-1.501-.186-.4-.151-.867.093-1.236a1.42 1.42 0 01-.2-1.166c.069-.273.226-.516.447-.694a1.41 1.41 0 01.2-1.722c.233-.248.557-.391.917-.407l.078-.001a9.385 9.385 0 01-.44-2.85c0-3.407 1.847-6.554 4.844-8.258a9.822 9.822 0 019.687 0zM4.188 14.758c.125.687 2.357 2.35 2.14 2.707-.19.315-.796-.239-.948-.386l-.041-.04-.168-.147c-.561-.479-2.304-1.9-2.74-1.432-.43.46.119.859 1.055 1.42l.784.467.136.083c1.045.643 1.12.84.95 1.113-.188.295-3.07-2.1-3.34-1.083-.27 1.011 2.942 1.304 2.744 2.006-.2.7-2.265-1.324-2.685-.537-.425.79 2.913 1.718 2.94 1.725l.16.04.175.042c1.227.284 3.565.65 4.435-.604.673-.973.64-1.709-.248-2.61l-.057-.057c-.945-.928-1.495-2.288-1.495-2.288l-.017-.058-.025-.072c-.082-.22-.284-.639-.63-.584-.46.073-.798 1.21.12 1.933l.05.038c.977.721-.195 1.21-.573.534l-.058-.104-.143-.25c-.463-.799-1.282-2.111-1.739-2.397-.532-.332-.907-.148-.782.541zm14.842-.541c-.533.335-1.563 2.074-1.94 2.751a.613.613 0 01-.687.302.436.436 0 01-.176-.098.303.303 0 01-.049-.06l-.014-.028-.008-.02-.007-.019-.003-.013-.003-.017a.289.289 0 01-.004-.048c0-.12.071-.266.25-.427.026-.024.054-.047.084-.07l.047-.036c.022-.016.043-.032.063-.049.883-.71.573-1.81.131-1.917l-.031-.006-.056-.004a.368.368 0 00-.062.006l-.028.005-.042.014-.039.017-.028.015-.028.019-.036.027-.023.02c-.173.158-.273.428-.31.542l-.016.054s-.53 1.309-1.439 2.234l-.054.054c-.365.358-.596.69-.702 1.018-.143.437-.066.868.21 1.353.055.097.117.195.187.296.882 1.275 3.282.876 4.494.59l.286-.07.25-.074c.276-.084.736-.233 1.2-.42l.188-.077.065-.028.064-.028.124-.056.081-.038c.529-.252.964-.543.994-.827l.001-.036a.299.299 0 00-.037-.139c-.094-.176-.271-.212-.491-.168l-.045.01c-.044.01-.09.024-.136.04l-.097.035-.054.022c-.559.23-1.238.705-1.607.745h.006a.452.452 0 01-.05.003h-.024l-.024-.003-.023-.005c-.068-.016-.116-.06-.14-.142a.22.22 0 01-.005-.1c.062-.345.958-.595 1.713-.91l.066-.028c.528-.224.97-.483.985-.832v-.04a.47.47 0 00-.016-.098c-.048-.18-.175-.251-.36-.251-.785 0-2.55 1.36-2.92 1.36-.025 0-.048-.007-.058-.024a.6.6 0 01-.046-.088c-.1-.238.068-.462 1.06-1.066l.209-.126c.538-.32 1.01-.588 1.341-.831.29-.212.475-.406.503-.6l.003-.028c.008-.113-.038-.227-.147-.344a.266.266 0 00-.07-.054l-.034-.015-.013-.005a.403.403 0 00-.13-.02c-.162 0-.369.07-.595.18-.637.313-1.431.952-1.826 1.285l-.249.215-.033.033c-.08.078-.288.27-.493.386l-.071.037-.041.019a.535.535 0 01-.122.036h.005a.346.346 0 01-.031.003l.01-.001-.013.001c-.079.005-.145-.021-.19-.095a.113.113 0 01-.014-.065c.027-.465 2.034-1.991 2.152-2.642l.009-.048c.1-.65-.271-.817-.791-.493zM11.938 2.984c-4.798 0-8.688 3.829-8.688 8.55 0 .692.083 1.364.24 2.008l.008-.009c.252-.298.612-.46 1.017-.46.355.008.699.117.993.312.22.14.465.384.715.694.261-.372.69-.598 1.15-.605.852 0 1.367.728 1.562 1.383l.047.105.06.127c.192.396.595 1.139 1.143 1.68 1.06 1.04 1.324 2.115.8 3.266a8.865 8.865 0 002.024-.014c-.505-1.12-.26-2.17.74-3.186l.066-.066c.695-.684 1.157-1.69 1.252-1.912.195-.655.708-1.383 1.56-1.383.46.007.889.233 1.15.605.25-.31.495-.553.718-.694a1.87 1.87 0 01.99-.312c.357 0 .682.126.925.36.14-.61.215-1.245.215-1.898 0-4.722-3.89-8.55-8.687-8.55zm1.857 8.926l.439-.212c.553-.264.89-.383.89.152 0 1.093-.771 3.208-3.155 3.262h-.184c-2.325-.052-3.116-2.06-3.156-3.175l-.001-.087c0-1.107 1.452.586 3.25.586.716 0 1.379-.272 1.917-.526zm4.017-3.143c.45 0 .813.358.813.8 0 .441-.364.8-.813.8a.806.806 0 01-.812-.8c0-.442.364-.8.812-.8zm-11.624 0c.448 0 .812.358.812.8 0 .441-.364.8-.812.8a.806.806 0 01-.813-.8c0-.442.364-.8.813-.8zm7.79-.841c.32-.384.846-.54 1.33-.394.483.146.83.564.878 1.06.048.495-.212.97-.659 1.203-.322.168-.447-.477-.767-.585l.002-.003c-.287-.098-.772.362-.925.079a1.215 1.215 0 01.14-1.36zm-4.323 0c.322.384.377.92.14 1.36-.152.283-.64-.177-.925-.079l.003.003c-.108.036-.194.134-.273.24l-.118.165c-.11.15-.22.262-.377.18a1.226 1.226 0 01-.658-1.204c.048-.495.395-.913.878-1.059a1.262 1.262 0 011.33.394z"/></svg>
+                    </span>
+                    <span>Dataset</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Hero -->
+    <!-- Janus Concept Figure -->
+  <section class="section">
+    <div class="container is-max-desktop has-text-centered">
+      <figure class="figure">
+        <img 
+          src="static/images/janus_concept.png" 
+          alt="Concept illustration of Janus-Test" 
+          style="max-width: 80%; height: auto;"
+          loading="lazy">
+      </figure>
+    </div>
+  </section>
+  <!-- End Janus Concept Figure -->
+  <!-- Abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              While advancements in Spoken Language Models (SLMs) for voice assistants have enabled natural human-like conversations, a critical limitation persists in scenarios involving third-party interruptions, where multi-speaker utterances are often misidentified as a single speaker's continuous turn.
+              To overcome this limitation, this paper introduces a comprehensive framework to define and develop Third-Party Interruption (TPI) awareness. We propose two key resources to facilitate this: (1) TPI-Train, a large-scale training dataset of 80K instances derived from 26 realistic scenarios, and (2) TPI-Bench, a benchmark specifically designed to rigorously assess a model's ability to achieve TPI-awareness.
+              However, the multimodal nature of this data introduces a key training obstacle: semantic shortcut learning. This occurs when models learn to identify interruptions based on common linguistic patterns, rather than the essential acoustic shift between speakers.
+              To mitigate this, we introduce a training methodology that employs hard-negative mining, which compels the model to move beyond linguistic cues and ground its decisions in acoustic information, thereby making it genuinely TPI-aware.
+              Our approach is validated through rigorous experiments, demonstrating that the model successfully learns to rely on acoustic cues for interruption detection and maintains high robustness against challenging trick samples. Crucially, human evaluations confirm that the response strategies embedded in our framework are highly preferred by users for their effectiveness and naturalness.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Abstract -->
+
+  <!-- Motivation -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">The Problem: Voice Assistants Can't Tell Who's Speaking</h2>
+      <div class="content has-text-justified">
+        <p>
+          Modern voice assistants excel at one-on-one conversations. But real life is rarely that simple&mdash;someone else might chime in while you're mid-sentence with the assistant. When that happens, today's Spoken Language Models (SLMs) have no idea a different person just spoke. They blindly concatenate both utterances as if one speaker said it all, producing nonsensical or incorrect responses.
+        </p>
+        <p>
+          Consider a simple example: you ask your voice assistant <em>"Should we order the new pasta?"</em> and a friend interjects <em>"No, let's just get the usual."</em> A standard SLM treats this as a single self-correcting utterance and responds to the combined text&mdash;completely missing the social dynamics at play.
+        </p>
+      </div>
+
+      <figure class="figure">
+        <img src="static/images/figure1.png" alt="Example of a TPI query from our TPI-Corpus" loading="lazy">
+        <figcaption class="figure-caption">
+          <b>Figure 1:</b> Example of a TPI query from our dataset. The baseline SLM mistakes the third-party interruption for a continuous utterance from the primary speaker, while our TPI-aware model correctly identifies the interruption and responds appropriately.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Framework -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Our Framework: TPI-Train &amp; TPI-Bench</h2>
+      <div class="content has-text-justified">
+        <p>
+          To tackle this, we build a comprehensive framework with two pillars. First, <b>TPI-Train</b>&mdash;a large-scale dataset of 88K instances covering 26 realistic interruption scenarios, derived from established interruption taxonomies in linguistics. Each interruption is classified as either <em>Actionable</em> (the assistant should incorporate the interruption into its response) or <em>Ignorable</em> (the assistant should disregard it and focus on the primary speaker). The corresponding response strategies are baked into the training data, teaching the model <em>what</em> to do when it detects an interruption.
+        </p>
+        <p>
+          Second, <b>TPI-Bench</b>&mdash;a rigorous evaluation framework consisting of <b>TPI-Test</b> (2K samples measuring situation-discriminative responses) and <b>Janus-Test</b> (2K adversarial samples where the text is ambiguous enough to be a single speaker, forcing the model to rely on acoustic cues).
+        </p>
+      </div>
+
+      <figure class="figure">
+        <img src="static/images/figure2.png" alt="Overview of the TPI-Corpus and TPI-Bench construction pipeline" loading="lazy">
+        <figcaption class="figure-caption">
+          <b>Figure 2:</b> Overview of our corpus and TPI-Bench construction pipeline. (a) The corpus is generated from voice assistant data to cover diverse interruption scenarios, with each query classified as Actionable or Ignorable. (b) For Janus-Test, textually ambiguous samples&mdash;where the interruption could plausibly be read as a single speaker's utterance&mdash;are filtered and re-synthesized in the primary speaker's voice, creating a challenging adversarial test.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Hard Negatives & t-SNE -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">The Key Insight: Hard Negatives Against Semantic Shortcuts</h2>
+      <div class="content has-text-justified">
+        <p>
+          Simply training on interruption data is not enough. We discovered a critical pitfall: <b>semantic shortcut learning</b>. Models quickly learn to exploit textual patterns (e.g., contradictions, topic shifts) to detect interruptions, rather than actually listening for the acoustic shift between speakers. This makes them brittle&mdash;they flag single-speaker self-corrections as interruptions and miss interruptions that happen to be semantically coherent.
+        </p>
+        <p>
+          Our solution is <b>speaker-aware hard negative mining</b>. We create training samples where the <em>text is identical</em> to a real two-speaker interruption, but the audio is re-synthesized as a single speaker. This forces the model to confront cases where linguistic cues are useless and the only distinguishing signal is the change in voice. The result: the model learns to ground its interruption detection in acoustic evidence rather than taking semantic shortcuts.
+        </p>
+        <p>
+          The t-SNE visualization below makes this clear. In the baseline and earlier ablations, embeddings for different speaker configurations sharing the same text overlap heavily&mdash;appearing as a muddled mix of blue and red, indistinguishable from each other. But in our full model (TPI-Full), these collapse into well-separated blue and red clusters, showing that the model has learned to discriminate speaker identity from acoustic cues alone, even when the underlying text is identical.
+        </p>
+      </div>
+
+      <figure class="figure">
+        <img src="static/images/figure3_tsne.png" alt="t-SNE visualization of embedding spaces across training configurations" loading="lazy">
+        <figcaption class="figure-caption">
+          <b>Figure 3:</b> <b>t-SNE visualization.</b> Training with hard negatives (HN) yields a structured embedding space with distinct clusters. Even when utterances share identical semantic content, the model trained with hard negatives (TPI-Full) clearly separates them based on acoustic speaker identity. The hard negative cluster (red) sits between two-speaker interruptions (blue) and single-speaker utterances (green), reflecting the model's ability to balance semantic and acoustic alignment.
+        </figcaption>
+      </figure>
+
+      <div class="content has-text-centered" style="margin-top: 2.5rem;">
+        <p style="color: var(--text-secondary); font-size: 1.05rem;">
+          For full details on how we define interruption scenarios, construct the dataset, design response strategies, and evaluate models, please refer to our paper.
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- End Narrative Sections -->
+
+  <!-- TPI-Corpus Demo -->
+  <section class="section hero is-light" id="tpi-corpus">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">TPI-Corpus</h2>
+
+      <div class="card chat-card">
+        <div class="card-content">
+          <!-- Controls -->
+          <div class="columns is-variable is-4">
+            <div class="column is-5">
+              <label class="label">Taxonomy</label>
+              <div class="select is-fullwidth">
+                <select id="txSelect">
+                  <option value="">-- Select taxonomy --</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-5">
+              <label class="label">Sub-taxonomy</label>
+              <div class="select is-fullwidth">
+                <select id="subtxSelect" disabled>
+                  <option value="">-- Select sub-taxonomy --</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2 is-flex is-align-items-flex-end">
+              <button id="randomBtn" class="button is-info is-light is-fullwidth">Shuffle</button>
+            </div>
+          </div>
+
+          <hr class="soft">
+
+          <!-- Header -->
+          <div class="chat-header">
+            <span class="chat-domain" id="corpusTag">Preview</span>
+            <span class="chat-models">Audio query above, transcript below</span>
+          </div>
+
+          <!-- Audio -->
+          <div class="audio-row">
+            <div class="audio-box">
+              <div class="audio-title">Audio (query)</div>
+              <audio id="corpusAudio" controls></audio>
+            </div>
+          </div>
+
+          <!-- Transcript as two bubbles -->
+          <div id="corpusBubbles" style="margin-top:12px;">
+            <div class="msg user">
+              <div class="speaker">First Speaker</div>
+              <div class="text" id="spk1Text">?</div>
+            </div>
+            <div class="msg assistant">
+              <div class="speaker">Second Speaker</div>
+              <div class="text" id="spk2Text">?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End TPI-Corpus Demo -->
+
+  <!-- Response Examples -->
+  <section class="section" id="response-examples">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Response Examples</h2>
+      <div class="content has-text-justified" style="margin-bottom: 2rem;">
+        <p>
+          Below we compare baseline and our model's responses on two test settings.
+          <b>TPI-Test</b> uses genuine two-speaker audio where a third party actually interrupts the primary speaker&mdash;the model must detect the interruption and respond appropriately.
+          <b>Janus-Test</b> uses the <em>same text</em> re-synthesized entirely in the primary speaker's voice, so the audio sounds like one person speaking&mdash;even though the transcript reads like an interruption. Here, the model should recognize there is no real interruption and respond normally. Comparing these two reveals whether the model truly relies on acoustic cues or merely exploits textual patterns.
+        </p>
+      </div>
+
+      <!-- Actionable -->
+      <div class="card chat-card">
+        <div class="card-content">
+          <div class="level">
+            <div class="level-left">
+              <h3 class="title is-4">1. Actionable</h3>
+            </div>
+            <div class="level-right">
+              <button id="randActionableBtn" class="button is-info is-light">Shuffle</button>
+            </div>
+          </div>
+          <div class="audio-row" id="actionableAudioRow"></div>
+          <div id="actionableTranscriptBlock" class="transcript-block"></div>
+          <hr class="soft">
+          <h4 class="title is-5">Baseline</h4>
+          <div id="actionableBaselineRow" class="bubble-row"></div>
+          <hr class="soft">
+          <h4 class="title is-5">Ours</h4>
+          <div id="actionableOursRow" class="bubble-row"></div>
+        </div>
+      </div>
+
+      <!-- Ignorable -->
+      <div class="card chat-card">
+        <div class="card-content">
+          <div class="level">
+            <div class="level-left">
+              <h3 class="title is-4">2. Ignorable</h3>
+            </div>
+            <div class="level-right">
+              <button id="randIgnorableBtn" class="button is-info is-light">Shuffle</button>
+            </div>
+          </div>
+          <div class="audio-row" id="ignorableAudioRow"></div>
+          <div id="ignorableTranscriptBlock" class="transcript-block"></div>
+          <hr class="soft">
+          <h4 class="title is-5">Baseline</h4>
+          <div id="ignorableBaselineRow" class="bubble-row"></div>
+          <hr class="soft">
+          <h4 class="title is-5">Ours</h4>
+          <div id="ignorableOursRow" class="bubble-row"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Response Examples -->
+
+  <!-- BibTeX -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@inproceedings{lee2026still,
+  title={Still Between Us? Evaluating and Improving Voice Assistant Robustness to Third-Party Interruptions},
+  author={Lee, Dongwook and Song, Eunwoo and Lee, Che Hyun and Kim, Heeseung and Yoon, Sungroh},
+  booktitle={Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (ACL)},
+  year={2026},
+  url={https://tpi-va.github.io/}
+}</code></pre>
+    </div>
+  </section>
+  <!-- End BibTeX -->
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              <br>This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    /* ============================
+       Scroll to Top
+    ============================ */
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('scroll', function() {
+      var btn = document.querySelector('.scroll-to-top');
+      if (window.scrollY > 300) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    });
+
+    /* ============================
+       Copy BibTeX
+    ============================ */
+    function copyBibTeX() {
+      var code = document.getElementById('bibtex-code').textContent;
+      navigator.clipboard.writeText(code).then(function() {
+        var btn = document.querySelector('.copy-bibtex-btn');
+        btn.classList.add('copied');
+        btn.querySelector('.copy-text').textContent = 'Copied!';
+        setTimeout(function() {
+          btn.classList.remove('copied');
+          btn.querySelector('.copy-text').textContent = 'Copy';
+        }, 2000);
+      });
+    }
+
+    /* ============================
+       TPI-Corpus logic
+    ============================ */
+    const DATA_ROOT = 'static/demo/demo_page_data_random';
+    const MANIFEST_URL = DATA_ROOT + '/index.json';
+    const txSelect = document.getElementById('txSelect');
+    const subtxSelect = document.getElementById('subtxSelect');
+    const randomBtn = document.getElementById('randomBtn');
+    const corpusAudio = document.getElementById('corpusAudio');
+    const spk1Text = document.getElementById('spk1Text');
+    const spk2Text = document.getElementById('spk2Text');
+    const corpusTag = document.getElementById('corpusTag');
+    let manifest = null;
+    let currentTax = '';
+    let currentSub = '';
+
+    function selectFirstByDefault() {
+      const taxonomies = Object.keys(manifest || {}).sort();
+      if (!taxonomies.length) return;
+
+      const firstTax = taxonomies[0];
+      txSelect.value = firstTax;
+      onTaxonomyChange();
+
+      const subtax = Object.keys(manifest[firstTax] || {}).sort();
+      if (!subtax.length) return;
+
+      const firstSub = subtax[0];
+      subtxSelect.value = firstSub;
+      onSubtaxonomyChange();
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadManifest();
+      populateTaxonomies();
+
+      txSelect.addEventListener('change', onTaxonomyChange);
+      subtxSelect.addEventListener('change', onSubtaxonomyChange);
+      randomBtn.addEventListener('click', loadRandomSample);
+
+      selectFirstByDefault();
+
+      document.getElementById("randActionableBtn").addEventListener("click", () => loadResponseExample("Actionable"));
+      document.getElementById("randIgnorableBtn").addEventListener("click", () => loadResponseExample("Ignorable"));
+      loadResponseExample("Actionable");
+      loadResponseExample("Ignorable");
+    });
+
+    async function loadManifest() {
+      try {
+        const res = await fetch(MANIFEST_URL, { cache: 'no-store' });
+        if (!res.ok) throw new Error('Manifest not found');
+        manifest = await res.json();
+      } catch (e) {
+        console.error(e);
+        manifest = {};
+      }
+    }
+
+    function populateTaxonomies() {
+      txSelect.length = 1;
+      Object.keys(manifest).sort().forEach(tx => {
+        const opt = document.createElement('option');
+        opt.value = opt.textContent = tx;
+        txSelect.appendChild(opt);
+      });
+    }
+
+    function onTaxonomyChange() {
+      currentTax = txSelect.value;
+      subtxSelect.disabled = !currentTax;
+      subtxSelect.length = 1;
+      subtxSelect.value = "";
+      currentSub = "";
+
+      if (!currentTax || !manifest[currentTax]) {
+        resetView();
+        return;
+      }
+
+      const subtax = Object.keys(manifest[currentTax]).sort();
+      subtax.forEach(st => {
+        const opt = document.createElement('option');
+        opt.value = opt.textContent = st;
+        subtxSelect.appendChild(opt);
+      });
+
+      resetView();
+    }
+
+    function onSubtaxonomyChange() {
+      currentSub = subtxSelect.value;
+      resetView();
+      if (!currentTax || !currentSub) return;
+      const list = manifest[currentTax]?.[currentSub] || [];
+      if (list.length) renderByBasename(list[0]);
+    }
+
+    function resetView() {
+      corpusTag.textContent = currentTax && currentSub ? `${currentTax} / ${currentSub}` : 'Preview';
+      corpusAudio.src = '';
+
+      if (!currentTax) {
+        spk1Text.textContent = "Please select a taxonomy above.";
+        spk2Text.textContent = "Please select a taxonomy above.";
+      } else if (!currentSub) {
+        spk1Text.textContent = "Please select a sub-taxonomy above.";
+        spk2Text.textContent = "Please select a sub-taxonomy above.";
+      } else {
+        spk1Text.textContent = '?';
+        spk2Text.textContent = '?';
+      }
+    }
+
+    function loadRandomSample() {
+      if (!currentTax || !currentSub) return;
+      const list = manifest[currentTax]?.[currentSub] || [];
+      if (!list.length) return;
+      const idx = Math.floor(Math.random() * list.length);
+      renderByBasename(list[idx]);
+    }
+
+    async function renderByBasename(base) {
+      const wav = `${DATA_ROOT}/${currentTax}/${currentSub}/${base}.wav`;
+      const txt = `${DATA_ROOT}/${currentTax}/${currentSub}/${base}.txt`;
+      corpusAudio.src = wav;
+      try {
+        const res = await fetch(txt, { cache: 'no-store' });
+        const raw = await res.text();
+        const { s1, s2 } = parseTwoLineTranscript(raw);
+        spk1Text.textContent = s1;
+        spk2Text.textContent = s2;
+      } catch {
+        spk1Text.textContent = spk2Text.textContent = '?';
+      }
+    }
+
+    function parseTwoLineTranscript(raw) {
+      const lines = raw.replace(/\r/g, '').split('\n').map(t => t.trim()).filter(Boolean);
+      let s1 = '', s2 = '';
+      const re1 = /^speaker\s*1\s*:\s*(.*)$/i, re2 = /^speaker\s*2\s*:\s*(.*)$/i;
+      for (const line of lines) {
+        if (re1.test(line) && !s1) s1 = line.replace(re1, '$1');
+        if (re2.test(line) && !s2) s2 = line.replace(re2, '$1');
+      }
+      if (!s1) s1 = lines[0] || '';
+      if (!s2) s2 = lines[1] || '';
+      return { s1, s2 };
+    }
+
+    /* ============================
+       Response Examples logic
+    ============================ */
+    async function fetchTextFile(path) {
+      try {
+        const res = await fetch(path);
+        return res.ok ? await res.text() : "(missing)";
+      } catch {
+        return "(error)";
+      }
+    }
+
+    function createAudioBox(title, src) {
+      const box = document.createElement('div');
+      box.className = 'audio-box';
+      box.innerHTML = `<div class="audio-title">${title}</div>
+        <audio controls><source src="${src}" type="audio/wav"></audio>`;
+      return box;
+    }
+
+    async function loadResponseExample(style) {
+      const root = `static/demo/demo_page_answer/${style}`;
+      const sets = ["TPI-Eval", "TPI-Janus"];
+
+      const evalListRes = await fetch(`${root}/TPI-Eval/ours/audio/index.json`, { cache: "no-store" });
+      const evalList = evalListRes.ok ? await evalListRes.json() : [];
+      if (!evalList.length) return;
+
+      const base = evalList[Math.floor(Math.random() * evalList.length)].replace(".wav", "");
+
+      const audioPaths       = sets.map(set => `${root}/${set}/ours/audio/${base}.wav`);
+      const baselineTxtPaths = sets.map(set => `${root}/${set}/baseline/txt/${base}.txt`);
+      const oursTxtPaths     = sets.map(set => `${root}/${set}/ours/txt/${base}.txt`);
+
+      const audioTranscriptPath = `${root}/TPI-Eval/baseline/audio/${base}.txt`;
+      const audioTranscript = await fetchTextFile(audioTranscriptPath);
+
+      // Audio row
+      const audioRow = document.getElementById(style.toLowerCase() + "AudioRow");
+      audioRow.classList.add("row-with-sep");
+      audioRow.innerHTML = "";
+      audioRow.appendChild(createAudioBox("TPI-Test", audioPaths[0]));
+
+      const sep1 = document.createElement("div");
+      sep1.className = "v-sep";
+      audioRow.appendChild(sep1);
+
+      audioRow.appendChild(createAudioBox("Janus-Test", audioPaths[1]));
+
+      // Transcript block
+      const transcriptBlock = document.getElementById(style.toLowerCase() + "TranscriptBlock");
+      if (transcriptBlock) {
+        transcriptBlock.innerHTML = `<h4>Original Audio Transcript:</h4><pre>${audioTranscript}</pre>`;
+      }
+
+      // Bubble row helper
+      const renderBubbleRow = async (targetId, evalLabel, evalTxtPath, janusLabel, janusTxtPath) => {
+        const container = document.getElementById(targetId);
+        if (!container) return;
+
+        const [evalTxt, janusTxt] = await Promise.all([
+          fetchTextFile(evalTxtPath),
+          fetchTextFile(janusTxtPath)
+        ]);
+
+        container.classList.add("row-with-sep");
+        container.innerHTML = `
+          <div class="msg user">
+            <div class="speaker">${evalLabel}</div>
+            <div class="text">${(evalTxt || "").replace(/\n/g, "<br>")}</div>
+          </div>
+          <div class="v-sep"></div>
+          <div class="msg assistant">
+            <div class="speaker">${janusLabel}</div>
+            <div class="text">${(janusTxt || "").replace(/\n/g, "<br>")}</div>
+          </div>
+        `;
+      };
+
+      await renderBubbleRow(
+        style.toLowerCase() + "BaselineRow",
+        "TPI-Test", baselineTxtPaths[0],
+        "Janus-Test", baselineTxtPaths[1]
+      );
+
+      await renderBubbleRow(
+        style.toLowerCase() + "OursRow",
+        "TPI-Test", oursTxtPaths[0],
+        "Janus-Test", oursTxtPaths[1]
+      );
+    }
+  </script>
+</body>
+</html>

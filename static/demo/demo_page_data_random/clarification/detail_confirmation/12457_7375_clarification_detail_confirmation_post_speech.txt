@@ -1,0 +1,2 @@
+First Speaker: In AngularJS, which service is used to make HTTP requests to a server?
+Second Speaker: HTTP requests in AngularJS? You mean like with the http service or $http?
